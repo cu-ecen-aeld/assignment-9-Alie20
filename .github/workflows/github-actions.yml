@@ -20,6 +20,7 @@ jobs:
       # ✅ Remove any old key from known_hosts (important for GitHub SSH host fingerprint changes)
       - name: Remove github.com from known_hosts
         run: ssh-keygen -R github.com || true
+        
 
       # ✅ Setup SSH agent and load the private key from GitHub Secrets
       - uses: webfactory/ssh-agent@v0.5.3
@@ -28,7 +29,10 @@ jobs:
 
       # ✅ Add github.com to known_hosts to prevent MITM warning
       - name: Add github.com to known_hosts
-        run: ssh-keyscan github.com >> ~/.ssh/known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
 
       # ✅ Run the build script
       - name: Run full test
