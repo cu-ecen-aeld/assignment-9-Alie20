@@ -7,36 +7,22 @@ on:
       - '*'
 
 jobs:
-  full-test:
-    container: cuaesd/aesd-autotest:24-assignment5-buildroot
-    runs-on: self-hosted
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Checkout submodules
-        run: git submodule update --init --recursive
-
-      # ✅ Remove any old key from known_hosts (important for GitHub SSH host fingerprint changes)
-      - name: Remove github.com from known_hosts
-        run: ssh-keygen -R github.com || true
-
-      # ✅ Setup SSH agent and load the private key from GitHub Secrets
-      - uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      # ✅ Add github.com to known_hosts to prevent MITM warning
-      - name: Add github.com to known_hosts
-        run: ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-      # ✅ Run the build script
-      - name: Run full test
-        env:
-          GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
-        run: ./full-test.sh
-
-      # Optional: remove loaded identities
-      - name: Cleanup
-        if: always()
-        run: ssh-add -D
+    full-test:
+        container: cuaesd/aesd-autotest:24-assignment7-buildroot
+        runs-on: self-hosted
+        timeout-minutes: 120
+        steps:
+          - uses: actions/checkout@v2
+          - name: Checkout submodules
+            run: git submodule update --init --recursive
+          - uses: webfactory/ssh-agent@v0.5.3
+            with:
+                ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          - name: Run full test
+            env:
+              GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
+            run: ./full-test.sh
+          - name: Cleanup
+            if: always()
+            run: |
+              ssh-add -D
