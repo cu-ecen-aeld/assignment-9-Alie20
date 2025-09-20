@@ -3,23 +3,23 @@
 case "$1" in
     start)
         echo "Loading scull driver..."
-        scull_load || echo "Failed to load scull"
+        insmod /lib/modules/$(uname -r)/extra/scull.ko || { echo "Failed to load scull"; exit 1; }
 
         echo "Loading faulty driver..."
-        module_load faulty || echo "Failed to load faulty"
+        insmod /lib/modules/$(uname -r)/extra/faulty.ko || { echo "Failed to load faulty"; exit 1; }
 
         echo "Loading hello module..."
-        modprobe hello || echo "Failed to load hello"
+        insmod /lib/modules/$(uname -r)/extra/hello.ko || { echo "Failed to load hello"; exit 1; }
         ;;
     stop)
         echo "Unloading hello module..."
-        rmmod hello || echo "Failed to unload hello"
+        rmmod hello || true
 
         echo "Unloading faulty driver..."
-        module_unload faulty || echo "Failed to unload faulty"
+        rmmod faulty || true
 
         echo "Unloading scull driver..."
-        scull_unload || echo "Failed to unload scull"
+        rmmod scull || true
         ;;
     *)
         echo "Usage: $0 {start|stop}"
