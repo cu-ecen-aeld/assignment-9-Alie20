@@ -1,0 +1,31 @@
+#!/bin/sh
+
+case "$1" in
+    start)
+        echo "Loading scull driver..."
+        scull_load || echo "Failed to load scull"
+
+        echo "Loading faulty driver..."
+        module_load faulty || echo "Failed to load faulty"
+
+        echo "Loading hello module..."
+        modprobe hello || echo "Failed to load hello"
+        ;;
+    stop)
+        echo "Unloading hello module..."
+        rmmod hello || echo "Failed to unload hello"
+
+        echo "Unloading faulty driver..."
+        module_unload faulty || echo "Failed to unload faulty"
+
+        echo "Unloading scull driver..."
+        scull_unload || echo "Failed to unload scull"
+        ;;
+    *)
+        echo "Usage: $0 {start|stop}"
+        exit 1
+        ;;
+esac
+
+exit 0
+
