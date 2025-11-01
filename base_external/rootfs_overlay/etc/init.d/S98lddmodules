@@ -1,0 +1,31 @@
+#!/bin/sh
+
+case "$1" in
+    start)
+        echo "Loading scull driver..."
+        insmod /lib/modules/$(uname -r)/extra/scull.ko || { echo "Failed to load scull"; exit 1; }
+
+        echo "Loading faulty driver..."
+        insmod /lib/modules/$(uname -r)/extra/faulty.ko || { echo "Failed to load faulty"; exit 1; }
+
+        echo "Loading hello module..."
+        insmod /lib/modules/$(uname -r)/extra/hello.ko || { echo "Failed to load hello"; exit 1; }
+        ;;
+    stop)
+        echo "Unloading hello module..."
+        rmmod hello || true
+
+        echo "Unloading faulty driver..."
+        rmmod faulty || true
+
+        echo "Unloading scull driver..."
+        rmmod scull || true
+        ;;
+    *)
+        echo "Usage: $0 {start|stop}"
+        exit 1
+        ;;
+esac
+
+exit 0
+
