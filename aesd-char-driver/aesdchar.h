@@ -7,9 +7,6 @@
 
 #ifndef AESD_CHAR_DRIVER_AESDCHAR_H_
 #define AESD_CHAR_DRIVER_AESDCHAR_H_
-#include "aesd-circular-buffer.h"
-#include <linux/cdev.h>
-#include <linux/mutex.h>
 
 #define AESD_DEBUG 1  //Remove comment on this line to enable debug
 
@@ -31,13 +28,7 @@ struct aesd_dev
     /**
      * TODO: Add structure(s) and locks needed to complete assignment requirements
      */
-    struct cdev cdev;     		  /* Char device structure      */
-    struct aesd_circular_buffer buffer;  
-    struct mutex lock;
-    char *write_buffer;                   /* Temporary buffer for partial writes */
-    size_t size;             /* Amount of data currently in write_buffer */    
-    struct aesd_buffer_entry entry;        /* Entry being written */
-
+    struct cdev cdev;     /* Char device structure      */
 };
 
 
