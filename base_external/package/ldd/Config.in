@@ -1,5 +1,5 @@
 config BR2_PACKAGE_LDD
     bool "ldd drivers (misc-modules + scull)"
     help
-      Build and install misc-modules and scull drivers from the ldd3 source tree.
+      Build and install misc-modules and scull drivers from the ldd3 source tree
 
