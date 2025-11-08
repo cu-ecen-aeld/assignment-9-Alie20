@@ -4,7 +4,7 @@
 #
 ##############################################################
 
-AESD_ASSIGNMENTS_VERSION = 1a53ae96bd434af828dd1feb129ab6ef3a338d99
+AESD_ASSIGNMENTS_VERSION = 9b7cffeec5db50ffe01d027b69af4e99d962550f
 AESD_ASSIGNMENTS_SITE = git@github.com:cu-ecen-aeld/assignments-3-and-later-Alie20.git
 AESD_ASSIGNMENTS_SITE_METHOD = git
 AESD_ASSIGNMENTS_GIT_SUBMODULES = YES
