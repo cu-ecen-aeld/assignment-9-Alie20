@@ -4,7 +4,7 @@
 #
 ##############################################################
 
-AESD_ASSIGNMENTS_VERSION = 7881d99c698b0647383334b84c1776c068c86e97
+AESD_ASSIGNMENTS_VERSION = ae7739bc0f2ef113e365030de4b5ba26f6ae7505
 AESD_ASSIGNMENTS_SITE = git@github.com:cu-ecen-aeld/assignments-3-and-later-Alie20.git
 AESD_ASSIGNMENTS_SITE_METHOD = git
 AESD_ASSIGNMENTS_GIT_SUBMODULES = YES
@@ -17,7 +17,7 @@ define AESD_ASSIGNMENTS_BUILD_CMDS
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/finder-app all
 
 	# Build the aesdsocket server (compiled with char device enabled)
-	$(MAKE) -C $(@D)/server CROSS_COMPILE=$(TARGET_CROSS) CC=$(TARGET_CC) USE_AESD_CHAR_DEVICE=0
+	$(MAKE) -C $(@D)/server CROSS_COMPILE=$(TARGET_CROSS) CC=$(TARGET_CC) USE_AESD_CHAR_DEVICE=1
 
 endef
 

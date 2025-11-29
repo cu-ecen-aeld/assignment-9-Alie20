@@ -4,7 +4,7 @@
 #
 ##############################################################
 
-AESDCHAR_VERSION = b3ebf55903a047ec8db587d692aa52e0b463ef46
+AESDCHAR_VERSION = e4f3d7dcb11678bf7c002f631f80715707edfc6f
 AESDCHAR_SITE = git@github.com:cu-ecen-aeld/assignments-3-and-later-Alie20.git
 AESDCHAR_SITE_METHOD = git
 AESDCHAR_GIT_SUBMODULES = YES
